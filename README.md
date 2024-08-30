@@ -3,6 +3,19 @@ Educational purposes only
 
 ## Getting Started
 
+Setup your environment by installing the dependencies:
+
+```bash
+pnpm install
+```
+
+and your .env
+
+```bash
+cp .env.dist .env
+npx auth secret
+```
+
 First, run the development server:
 
 ```bash
