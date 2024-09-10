@@ -22,7 +22,6 @@ export default function RootLayout({
           <NextAuthProvider>
                 {children}
           </NextAuthProvider>
-          {/* testing for now */}
           <AppBar />
         </body>
       </html>

@@ -1,41 +1,49 @@
-// App bar at the bottom of page
-// usages: everywhere
 'use client';
 
-import Link from "next/link";
-import LinkIcon from "next/link";
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
+import EqualizerRoundedIcon from '@mui/icons-material/EqualizerRounded';
+import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
+import CarpenterRoundedIcon from '@mui/icons-material/CarpenterRounded';
+import {BottomNavigation, BottomNavigationAction} from "@mui/material";
+import Paper from '@mui/material/Paper';
+import { usePathname } from 'next/navigation';
+import React from "react";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
-import nav from "react";
 
 //Probably could have this populate from the DB but its static so...
 const links = [
-    { name: 'Home', href: '/home', icon: 'HomeIcon' },
-    { name: 'Meta Hub', href: '/meta', icon: 'MetaIcon' },
-    { name: 'Creators', href: '/creators', icon: 'CreatorsIcon' },
-    { name: 'TTK Tool', href: '/ttk', icon: 'TtkToolIcon' },
-    { name: 'Hub', href: '/hub', icon: 'HubIcon' },
+    { name: 'Home', href: '/', icon: HomeRoundedIcon },
+    { name: 'Meta Hub', href: '/meta', icon: CarpenterRoundedIcon }, // There's no icon in MUI for a gun :P
+    { name: 'Creators', href: '/creators', icon: GroupsRoundedIcon },
+    { name: 'TTK Tool', href: '/ttk', icon: EqualizerRoundedIcon },
+    { name: 'Hub', href: '/hub', icon: GridViewRoundedIcon },
 ];
 
 export default function AppBar() {
     const pathName = usePathname();
 
+// Paper is pretty handy here for z-indexing I think, there might be a better way to do this though
     return (
-        <nav className="AppBar">
-            {links.map((link) => {
-                return (
-                    <Link key={link.name} href={link.href}
-                          className={clsx(
-                              "flex gap-2 text-gray-400 hover:text-green-600 bg-black p-3 text-xs",
-                              {
-                                  "text-green-600" : pathName === link.href,
-                              },
-                          )}
-                    >
-                        <p className="hidden md:block">{link.name}</p>
-                    </Link>
-                );
-            })}
-        </ul>
+        <>
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                <BottomNavigation
+                    className="bg-black text-lim"
+                    showLabels
+                    value={pathName}
+                >
+                    {links.map((link) => {
+                        const LinkIcon = link.icon;
+
+                        return <BottomNavigationAction
+                            key={link.name}
+                            label={link.name}
+                            icon={<LinkIcon />}
+                            className={clsx("text-gray-400", {"text-lime-500" : pathName === link.href})}
+                        />
+                    })}
+                </BottomNavigation>
+            </Paper>
+        </>
     );
 }
