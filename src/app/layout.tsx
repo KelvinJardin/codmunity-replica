@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/components/Auth";
+import AppBar from "@/components/Layout/AppBar"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,8 @@ export default function RootLayout({
           <NextAuthProvider>
                 {children}
           </NextAuthProvider>
+          {/* testing for now */}
+          <AppBar />
         </body>
       </html>
   );
