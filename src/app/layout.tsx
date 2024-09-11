@@ -21,8 +21,8 @@ export default function RootLayout({
         <body className={inter.className}>
           <NextAuthProvider>
                 {children}
+              <AppBar />
           </NextAuthProvider>
-          <AppBar />
         </body>
       </html>
   );
