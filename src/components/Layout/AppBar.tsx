@@ -26,28 +26,21 @@ export default function AppBar() {
 
 // Paper is pretty handy here for z-indexing I think, there might be a better way to do this though
     return (
-        <>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    className="bg-black"
-                    showLabels
-                    value={pathName}
-                >
-                    {links.map((link) => {
-                        const LinkIcon = link.icon;
-
-                        return <BottomNavigationAction
-                            key={link.name}
-                            label={link.name}
-                            icon={<LinkIcon />}
-                            className={clsx("text-gray-400", {"text-lime-500" : pathName === link.href})}
-                            onClick={(e) => {
-                                router.push(link.href);
-                            }}
-                        />
-                    })}
-                </BottomNavigation>
-            </Paper>
-        </>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <BottomNavigation
+                className="bg-black"
+                showLabels
+                value={pathName}
+            >
+                {links.map(({name, icon: Icon, href}) =>
+                    <BottomNavigationAction
+                        key={name}
+                        label={name}
+                        icon={<Icon/>}
+                        className={clsx("text-gray-400", {"text-lime-500": pathName === href})}
+                        onClick={() => router.push(href)}
+                    />)}
+            </BottomNavigation>
+        </Paper>
     );
 }
